@@ -2,23 +2,30 @@
 
 
 {% block head %} <title>Home</title> {% endblock head %}
-    
+
 
 {% block body %}
-    <h1>All Posts</h1>
-    
-    {% for post in posts %}
-        <h3>{{post.title}}</h3>
+<div class="mt-5">
+    <h1 style="display: inline;">All Posts</h1>
+    <a style="display: inline;" href="/posts/new" class="btn btn-success float-right">+ New Post</a>
 
-        <p>{{post.content}}</p>
+</div>
+<hr>
+{% for post in posts %}
+<br>
+<h3>{{post.title}}</h3>
 
-        {% if post.author %}
-            <p><i>By: {{post.author}}</i></p>
-        {% else %}
-            <p><i>By: anonymous</i></p>
-        {% endif %}
-        
-    {% endfor %}
-        
+<p style="white-space: pre-wrap;">{{post.content}}</p>
+
+{% if post.author %}
+<small>Written by:{{post.author}} on {{post.date_posted}}</small><br>
+{% else %}
+<small>Written by: anonymous on {{post.date_posted}}</small><br>
+{% endif %}
+<br>
+<a href="/posts/delete/{{post.id}}" class="btn btn-danger">Delete</a>
+<a href="/posts/edit/{{post.id}}" class="btn btn-primary">Edit</a>
+<hr>
+{% endfor %}
+
 {% endblock body %}
-    
